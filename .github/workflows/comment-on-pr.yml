@@ -23,7 +23,7 @@ jobs:
               pull_number: context.payload.pull_request.number
             });
 
-	    const body = "Some Text";
+            const body = "Some Text";
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
