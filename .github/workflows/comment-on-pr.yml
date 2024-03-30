@@ -10,14 +10,10 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v2
-
-      - name: Get commit SHA
-        id: commit
-        run: echo "::set-output name=sha::$(git rev-parse HEAD)"
+        uses: actions/checkout@v4
 
       - name: Comment on PR
-        uses: actions/github-script@v5
+        uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -27,7 +23,7 @@ jobs:
               pull_number: context.payload.pull_request.number
             });
 
-            const commentBody = `This is commit ${process.env['INPUT_SHA']}`;
+            const commentBody = ` [Make new tag](https://github.com/Malvolio/self-commenting/releases/new?tag=qa_release&target=${{ context.sha }})`;
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
