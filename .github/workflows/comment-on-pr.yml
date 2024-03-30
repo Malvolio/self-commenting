@@ -23,10 +23,10 @@ jobs:
               pull_number: context.payload.pull_request.number
             });
 
-            const commentBody = "[Make new tag](https://github.com/Malvolio/self-commenting/releases/new?tag=qa_release&target=${{ context.sha }})";
+            const body = "Some Text";
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: pullRequest.number,
-              body: commentBody
+              body
             });
